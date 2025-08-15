@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Concepts Conveyed</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+  </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+    <style>
+        body {
+            font-family: 'Work Sans', sans-serif;
+        }
+    
+        #thumbnailScroll::-webkit-scrollbar {
+            display: none;
+        }
+        #thumbnailScroll {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+    </style>
+<body>
+    <canvas id="webgl-canvas" class="absolute block top-0 lef-0 z-0"></canvas>
+
+<div class="absolute top-[5px] left-[10px] w-[200px]">
+    <img src="./photos/CC_white.png" alt="">
+</div>
+
+<div class="absolute flex gap-2 left-[50%] -translate-x-[50%] bottom-2 rounded-xl whitespace-nowrap">
+    <button class="area-button flex gap-1 bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] px-3 py-1 font-semibold rounded-lg data-[active=true]:bg-[#f5f4ea]">
+      <h1 class="bg-[#757741] text-[#d3d2a5] rounded-full px-2">1</h1>
+      Entrance
+    </button>
+    <button class="area-button flex gap-1 bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] px-3 py-1 font-semibold rounded-lg data-[active=true]:bg-[#f5f4ea]">
+      <h1 class="bg-[#757741] text-[#d3d2a5] rounded-full px-2">2</h1>
+      Front Yard
+    </button>
+    <button class="area-button flex gap-1 bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] px-3 py-1 font-semibold rounded-lg data-[active=true]:bg-[#f5f4ea]">
+      <h1 class="bg-[#757741] text-[#d3d2a5] rounded-full px-2">3</h1>
+      Back Yard
+    </button>
+    <button class="area-button flex gap-1 bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] px-3 py-1 font-semibold rounded-lg data-[active=true]:bg-[#f5f4ea]">
+      <h1 class="bg-[#757741] text-[#d3d2a5] rounded-full px-2">4</h1>
+      Cabana Kitchen
+    </button>
+    <button class="area-button flex gap-1 bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] px-3 py-1 font-semibold rounded-lg data-[active=true]:bg-[#f5f4ea]">
+      <h1 class="bg-[#757741] text-[#d3d2a5] rounded-full px-2">5</h1>
+      Garden
+    </button>
+</div>
+
+<!-- <button id="openMap" class="absolute left-2 bottom-2">
+  Open in Google Maps
+</button>
+
+Modal Map -->
+<!-- <div id="mapModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 hidden">
+  <div id="mapContent"
+       class="relative w-[95%] max-w-5xl h-[80vh] transform -translate-y-[100vh] opacity-0 transition-all duration-500 ease-out bg-white rounded-xl overflow-hidden">
+    <button id="closeMap" class="absolute top-2 right-3 text-white text-2xl font-bold z-10">&times;</button>
+    <iframe id="ndFrame" class="w-full h-full border-0" src="about:blank" loading="lazy"></iframe>
+  </div>
+</div> -->
+
+    <button id="openVideo" class="absolute flex top-2 left-[50%] -translate-x-[50%] gap-1 bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] px-3 py-1 font-semibold rounded-lg">
+      <i data-lucide="play" class=" bg-[#757741] text-[#d3d2a5] rounded-full px-[5px]"></i>
+      Video
+    </button>
+
+    <div id="videoModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-40 hidden">
+  <div id="videoContent"
+       class="relative w-[90%] max-w-3xl transform -translate-y-[100vh] opacity-0 transition-all duration-1000 ease-out">
+    <button id="closeVideo" class="absolute top-2 right-2 text-white text-2xl font-bold z-10"></button>
+    <video id="videoPlayer" controls class="w-full h-[60vh] rounded-lg">
+      <source src="./videos/full.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+    <!-- Kontainer deskripsi -->
+<div id="pooldescription" class="description-box absolute top-2 right-2 bg-[#757741] rounded-lg shadow-lg w-96 z-20" style="display: none;">
+  <button class="absolute top-2 right-2 text-white close-description bg-[#757741] rounded-full p-1">
+    <i data-lucide="x"></i>
+  </button>
+  <img src="./photos/entrance1.png" alt="" id="descImage" class="rounded-lg w-full h-[200px] object-cover mb-2">
+  <video id="descVideo" class="w-full h-[420px] object-contain rounded-xl hidden" controls playsinline preload="metadata"></video>
+  <h4 class="text-lg font-bold text-[#f5f4ea] mx-4">Entrance</h4>
+  <p class="text-sm mb-3 text-[#f5f4ea] mx-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, dolores libero. Vel similique libero sit, sapiente assumenda atque voluptas sequi qui magni ea aut excepturi corporis earum, harum autem a itaque. Vero mollitia ea eius unde eum, non pariatur velit, molestias laborum quis dolorum similique, harum cumque reprehenderit quidem quia.</p>
+    <div class="flex gap-2 mx-4 mb-4">
+    <button class="galleryBtn flex gap-2 text-center justify-center font-medium items-center bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] w-full p-2 rounded-xl" data-gallery-id="pool"
+     data-media='[{"type":"video","src":"./videos/entrance.mp4","poster":"./photos/entrance2.png"},
+     {"type":"image","src":"./photos/entrance1.png"},
+     {"type":"image","src":"./photos/entrance2.png"},
+     {"type":"image","src":"./photos/entrance3.png"},
+     {"type":"image","src":"./photos/entrance1-n.png"},
+     {"type":"image","src":"./photos/entrance2-n.png"},
+     {"type":"image","src":"./photos/entrance3-n.png"}]'>
+      <i data-lucide="image" class="size-5 my-auto "></i>
+      <span class="font-semibold">Gallery</span>
+    </button>
+    <a href="/Demo02/area1/360/" class="w-full">
+    <!-- <a href="/area1/360/" class="w-full"> -->
+        <button class="galleryBtn flex gap-2 text-center justify-center font-medium items-center bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] w-full p-2 rounded-xl">
+        <i data-lucide="rotate-3d" class="size-5 my-auto "></i>
+        <span class="font-semibold">360 View</span>
+        </button>
+    </a>
+    </div>
+</div>
+
+<div id="housedescription" class="description-box absolute top-2 right-2 bg-[#757741] rounded-lg shadow-lg w-96 z-20" style="display: none;">
+  <button class="absolute top-2 right-2 text-[#f5f4ea] close-description bg-[#757741] rounded-full p-1">
+    <i data-lucide="x"></i>
+  </button>
+  <img src="./photos/front1.png" alt="" id="descImage" class="rounded-lg w-full h-[200px] object-cover mb-2">
+  <video id="descVideo" class="w-full h-[420px] object-contain rounded-xl hidden" controls playsinline preload="metadata"></video>
+  <h4 class="text-lg font-bold text-[#f5f4ea] mx-4">Front Yard</h4>
+  <p class="text-sm mb-3 text-[#f5f4ea] mx-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, dolores libero. Vel similique libero sit, sapiente assumenda atque voluptas sequi qui magni ea aut excepturi corporis earum, harum autem a itaque. Vero mollitia ea eius unde eum, non pariatur velit, molestias laborum quis dolorum similique, harum cumque reprehenderit quidem quia.</p>
+    <div class="flex gap-2 mx-4 mb-4">
+    <button class="galleryBtn flex gap-2 text-center justify-center font-medium items-center bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] w-full p-2 rounded-xl" data-gallery-id="house"
+     data-media='[{"type":"video","src":"./videos/frontraw.mp4","poster":"./photos/front3.png"},
+     {"type":"image","src":"./photos/front1.png"},
+     {"type":"image","src":"./photos/front2.png"},
+     {"type":"image","src":"./photos/front3.png"},
+     {"type":"image","src":"./photos/front4.png"},
+     {"type":"image","src":"./photos/front1-n.png"},
+     {"type":"image","src":"./photos/front2-n.png"},
+     {"type":"image","src":"./photos/front3-n.png"},
+     {"type":"image","src":"./photos/front4-n.png"}]'>
+      <i data-lucide="image" class="size-5 my-auto "></i>
+      <span class="font-semibold">Gallery</span>
+    </button>
+    <a href="/Demo02/area2/360/" class="w-full">
+        <button class="galleryBtn flex gap-2 text-center justify-center font-medium items-center bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] w-full p-2 rounded-xl">
+        <i data-lucide="rotate-3d" class="size-5 my-auto "></i>
+        <span class="font-semibold">360 View</span>
+        </button>
+    </a>
+    </div>
+</div>
+
+<div id="gardendescription" class="description-box absolute top-2 right-2 bg-[#757741] rounded-lg shadow-lg w-96 z-20" style="display: none;">
+  <button class="absolute top-2 right-2 text-[#f5f4ea] close-description bg-[#757741] rounded-full p-1">
+    <i data-lucide="x"></i>
+  </button>
+  <img src="./photos/back1.png" alt="" class="rounded-lg w-full h-[200px] object-cover mb-2">
+  <video id="descVideo" class="w-full h-[420px] object-contain rounded-xl hidden" controls playsinline preload="metadata"></video>
+  <h4 class="text-lg font-bold text-[#f5f4ea] mx-4">Back Yard</h4>
+  <p class="text-sm mb-3 text-[#f5f4ea] mx-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, dolores libero. Vel similique libero sit, sapiente assumenda atque voluptas sequi qui magni ea aut excepturi corporis earum, harum autem a itaque. Vero mollitia ea eius unde eum, non pariatur velit, molestias laborum quis dolorum similique, harum cumque reprehenderit quidem quia.</p>
+    <div class="flex gap-2 mx-4 mb-4">
+    <button class="galleryBtn flex gap-2 text-center justify-center font-medium items-center bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] w-full p-2 rounded-xl" data-gallery-id="poolgarden"
+     data-media='[{"type":"video","src":"./videos/backyard.mp4","poster":"./photos/back3.png"},
+     {"type":"video","src":"./videos/backyard2.mp4","poster":"./photos/back4.png"},
+     {"type":"image","src":"./photos/back1.png"},
+     {"type":"image","src":"./photos/back2.png"},
+     {"type":"image","src":"./photos/back3.png"},
+     {"type":"image","src":"./photos/back4.png"},
+     {"type":"image","src":"./photos/back5.png"},
+     {"type":"image","src":"./photos/back1-n.png"},
+     {"type":"image","src":"./photos/back2-n.png"},
+     {"type":"image","src":"./photos/back3-n.png"},
+     {"type":"image","src":"./photos/back4-n.png"},
+     {"type":"image","src":"./photos/back5-n.png"}]'>
+      <i data-lucide="image" class="size-5 my-auto "></i>
+      <span class="font-semibold">Gallery</span>
+    </button>
+    <a href="/Demo02/area3/360/" class="w-full">
+        <button class="galleryBtn flex gap-2 text-center justify-center font-medium items-center bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] w-full p-2 rounded-xl">
+        <i data-lucide="rotate-3d" class="size-5 my-auto "></i>
+        <span class="font-semibold">360 View</span>
+        </button>
+    </a>
+    </div>
+</div>
+
+<div id="arrivaldescription" class="description-box absolute top-2 right-2 bg-[#757741] rounded-lg shadow-lg w-96 z-20" style="display: none;">
+  <button class="absolute top-2 right-2 text-[#f5f4ea] close-description bg-[#757741] rounded-full p-1">
+    <i data-lucide="x"></i>
+  </button>
+  <img src="./photos/cabana1.png" alt="" class="rounded-lg w-full h-[200px] object-cover mb-2">
+  <video id="descVideo" class="w-full h-[420px] object-contain rounded-xl hidden" controls playsinline preload="metadata"></video>
+  <h4 class="text-lg font-bold text-[#f5f4ea] mx-4">Cabana Kitchen</h4>
+  <p class="text-sm mb-3 text-[#f5f4ea] mx-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, dolores libero. Vel similique libero sit, sapiente assumenda atque voluptas sequi qui magni ea aut excepturi corporis earum, harum autem a itaque. Vero mollitia ea eius unde eum, non pariatur velit, molestias laborum quis dolorum similique, harum cumque reprehenderit quidem quia.</p>
+    <div class="flex gap-2 mx-4 mb-4">
+    <button class="galleryBtn flex gap-2 text-center justify-center font-medium items-center bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] w-full p-2 rounded-xl" data-gallery-id="arrival"
+     data-media='[{"type":"video","src":"./videos/cabana.mp4","poster":"./photos/cabana1.png"},
+     {"type":"image","src":"./photos/cabana1.png"},
+     {"type":"image","src":"./photos/cabana2.png"},
+     {"type":"image","src":"./photos/cabana1-n.png"},
+     {"type":"image","src":"./photos/cabana2-n.png"}]'>
+      <i data-lucide="image" class="size-5 my-auto "></i>
+      <span class="font-semibold">Gallery</span>
+    </button>
+    <a href="/Demo02/area4/360/" class="w-full">
+        <button class="galleryBtn flex gap-2 text-center justify-center font-medium items-center bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] w-full p-2 rounded-xl">
+        <i data-lucide="rotate-3d" class="size-5 my-auto "></i>
+        <span class="font-semibold">360 View</span>
+        </button>
+    </a>
+    </div>
+</div>
+
+<div id="archdescription" class="description-box absolute top-2 right-2 bg-[#757741] rounded-lg shadow-lg w-96 z-20" style="display: none;">
+  <button class="absolute top-2 right-2 text-[#f5f4ea] close-description bg-[#757741] rounded-full p-1">
+    <i data-lucide="x"></i>
+  </button>
+  <img src="./photos/garden1.png" alt="" class="rounded-lg w-full h-[200px] object-cover mb-2">
+  <video id="descVideo" class="w-full h-[420px] object-contain rounded-xl hidden" controls playsinline preload="metadata"></video>
+  <h4 class="text-lg font-bold text-[#f5f4ea] mx-4">Garden</h4>
+  <p class="text-sm mb-3 text-[#f5f4ea] mx-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, dolores libero. Vel similique libero sit, sapiente assumenda atque voluptas sequi qui magni ea aut excepturi corporis earum, harum autem a itaque. Vero mollitia ea eius unde eum, non pariatur velit, molestias laborum quis dolorum similique, harum cumque reprehenderit quidem quia.</p>
+    <div class="flex gap-2 mx-4 mb-4">
+    <button class="galleryBtn flex gap-2 text-center justify-center font-medium items-center bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] w-full p-2 rounded-xl" data-gallery-id="arrival"
+     data-media='[{"type":"image","src":"./photos/garden1.png"},
+     {"type":"image","src":"./photos/garden2.png"},
+     {"type":"image","src":"./photos/garden3.png"},
+     {"type":"image","src":"./photos/garden1-n.png"},
+     {"type":"image","src":"./photos/garden2-n.png"},
+     {"type":"image","src":"./photos/garden3-n.png"}]'>
+      <i data-lucide="image" class="size-5 my-auto "></i>
+      <span class="font-semibold">Gallery</span>
+    </button>
+    <a href="/Demo02/area5/360/" class="w-full">
+        <button class="galleryBtn flex gap-2 text-center justify-center font-medium items-center bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] w-full p-2 rounded-xl">
+        <i data-lucide="rotate-3d" class="size-5 my-auto "></i>
+        <span class="font-semibold">360 View</span>
+        </button>
+    </a>
+    </div>
+</div>
+
+<!-- <div id="backdescription" class="description-box absolute top-2 right-2 bg-[#757741] rounded-lg shadow-lg w-96 z-20" style="display: none;">
+  <button class="absolute top-2 right-2 text-[#f5f4ea] close-description bg-[#757741] rounded-full p-1">
+    <i data-lucide="x"></i>
+  </button>
+  <img src="./photos/back.png" alt="" class="rounded-lg w-full h-[200px] object-cover mb-2">
+  <h4 class="text-lg font-bold text-[#f5f4ea] mx-4">Back of House</h4>
+  <p class="text-sm mb-3 text-[#f5f4ea] mx-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui, dolores libero. Vel similique libero sit, sapiente assumenda atque voluptas sequi qui magni ea aut excepturi corporis earum, harum autem a itaque. Vero mollitia ea eius unde eum, non pariatur velit, molestias laborum quis dolorum similique, harum cumque reprehenderit quidem quia.</p>
+    <div class="flex gap-2 mx-4 mb-4">
+    <button class="galleryBtn flex gap-2 text-center justify-center font-medium items-center bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] w-full p-2 rounded-xl" data-gallery-id="arrival"
+     data-images='["./photos/back.png", "./photos/back2.png"]'>
+      <i data-lucide="image" class="size-5 my-auto "></i>
+      <span class="font-semibold">Gallery</span>
+    </button>
+    <a href="/Demo02/area6/360/" class="w-full">
+        <button class="galleryBtn flex gap-2 text-center justify-center font-medium items-center bg-[#d3d2a5] hover:bg-[#f5f4ea] text-[#757741] w-full p-2 rounded-xl">
+        <i data-lucide="rotate-3d" class="size-5 my-auto "></i>
+        <span class="font-semibold">360 View</span>
+        </button>
+    </a>
+    </div>
+</div> -->
+
+ <!-- Carousel Section -->
+    <div class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden" id="carouselWrapper">
+      <div class="relative w-auto max-w-[50%]" id="carouselWrap">
+        <!-- Carousel -->
+        <div class="relative flex items-center justify-center" id="carouselContainer">
+          <button id="prevBtn" class="relative left-2 bg-[#f5f4ea] hover:bg-[#757741] hover:text-[#f5f4ea] rounded-full p-2 z-10">
+            <i data-lucide="chevron-left"></i>
+          </button>
+
+          <img id="carouselImage" class="w-[800px] h-[600px] object-contain rounded-lg cursor-pointer" alt="Slide" />
+          <video id="carouselVideo"
+          class="w-[800px] h-[600px] object-contain rounded-lg cursor-pointer hidden"
+          controls
+          playsinline
+          preload="metadata"></video>
+
+          <button id="nextBtn" class="relative right-2 bg-[#f5f4ea] hover:bg-[#757741] hover:text-[#f5f4ea] rounded-full p-2 z-10">
+            <i data-lucide="chevron-right"></i>
+          </button>
+        </div>
+        <div class="relative flex w-fit max-w-[90%] mx-auto mt-4 overflow-hidden">
+        <!-- Left Arrow -->
+        <button id="thumbLeft"
+          class="absolute left-0 top-1/2 -translate-y-1/2 bg-[#f5f4ea] hover:bg-[#757741] hover:text-[#f5f4ea] rounded-full p-1 shadow z-10">
+          <i data-lucide="chevron-left"></i>
+        </button>
+          <div id="thumbnailScroll" class="flex gap-2 overflow-x-auto scroll-smooth px-6 scrollbar-hide hidden">
+            <!-- <img src="./photos/ENTRANCE.jpg" class="thumbnail w-30 h-24 object-cover cursor-pointer border-2 border-transparent rounded" data-index="0" />
+            <img src="./photos/BED.jpg" class="thumbnail w-30 h-24 object-cover cursor-pointer border-2 border-transparent rounded" data-index="1" />
+            <img src="./photos/STUDYROOM.jpg" class="thumbnail w-30 h-24 object-cover cursor-pointer border-2 border-transparent rounded" data-index="2" />
+            <img src="./photos/ENSUITE.jpg" class="thumbnail w-30 h-24 object-cover cursor-pointer border-2 border-transparent rounded" data-index="3" />
+            <img src="./photos/KITCHEN.jpg" class="thumbnail w-30 h-24 object-cover cursor-pointer border-2 border-transparent rounded" data-index="4" />
+            <img src="./photos/LOUNGE.jpg" class="thumbnail w-30 h-24 object-cover cursor-pointer border-2 border-transparent rounded" data-index="5" />
+            <img src="./photos/PATIO_BACKYARD.jpg" class="thumbnail w-30 h-24 object-cover cursor-pointer border-2 border-transparent rounded" data-index="6" /> -->
+          </div>
+        <button id="thumbRight"
+          class="absolute right-0 top-1/2 -translate-y-1/2 bg-[#f5f4ea] hover:bg-[#757741] hover:text-[#f5f4ea] rounded-full p-1 shadow z-10">
+          <i data-lucide="chevron-right"></i>
+        </button>
+        </div>
+        <!-- <div class="w-[600px] text-center text-white mx-auto">
+            <h1>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem animi sed labore rerum, provident amet nulla aspernatur itaque quod vero.</h1>
+        </div> -->
+      </div>
+    </div>
+
+    <div id="cam-info" class="absolute bottom-2 right-2 bg-black text-white text-xs px-2 py-1 rounded z-10"></div>
+  
+    <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
