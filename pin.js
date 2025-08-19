@@ -31,7 +31,7 @@ const pin1 = createPin(
 );
 
 const pin2 = createPin(
-  new THREE.Vector3(-0.35, 0, 0.35),
+  new THREE.Vector3(-0.35, 0, 0),
   'assets/pin2.svg',
   'Unit B',
   'Available',
@@ -55,7 +55,7 @@ const pin4 = createPin(
 );
 
 const pin5 = createPin(
-  new THREE.Vector3(0, 0, 0.7),
+  new THREE.Vector3(-0.70, 0, 0.90),
   'assets/pin5.svg',
   'Unit B',
   'Available',
@@ -86,7 +86,7 @@ const pin5 = createPin(
       mesh: pin2,
       position: pin2.position,
       descriptionId: 'housedescription',
-      camera_position: new THREE.Vector3(0.09, 0.65, -0.10),
+      camera_position: new THREE.Vector3(0.18, 0.68, -0.27),
       camera_target: pin2.position,
     },
     {
@@ -110,7 +110,7 @@ const pin5 = createPin(
       mesh: pin5,
       position: pin5.position,
       descriptionId: 'archdescription',
-      camera_position: new THREE.Vector3(-0.34, 0.81, 1.04),
+      camera_position: new THREE.Vector3(-0.84, 0.79, 1.31),
       camera_target: pin5.position,
     },
     // {

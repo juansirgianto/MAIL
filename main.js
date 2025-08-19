@@ -46,12 +46,12 @@ splats.position.set(-0.4, 0.5, 0.40); // geser Y ke 0.2, X & Z tetap
 
 scene.add(splats);
 
-// const axesHelper = new THREE.AxesHelper( 10 );
-// axesHelper.position.y = 0;
-// scene.add( axesHelper );
+const axesHelper = new THREE.AxesHelper( 10 );
+axesHelper.position.y = 0;
+scene.add( axesHelper );
 
 // caminfo
-// const camInfo = document.getElementById('cam-info');
+const camInfo = document.getElementById('cam-info');
 
 const areaButtons = [
   {
@@ -62,8 +62,8 @@ const areaButtons = [
   },
   {
     button: document.querySelector('button:nth-child(2)'),
-    cameraPosition: [0.09, 0.65, -0.10],
-    cameraTarget: [-0.35, 0, 0.35],
+    cameraPosition: [0.18, 0.68, -0.27],
+    cameraTarget: [-0.35, 0, 0],
     descriptionId: 'housedescription',
   },
   {
@@ -80,8 +80,8 @@ const areaButtons = [
   },
   {
     button: document.querySelector('button:nth-child(5)'),
-    cameraPosition: [-0.34, 0.81, 1.04],
-    cameraTarget: [0, 0, 0.7],
+    cameraPosition: [-0.84, 0.79, 1.31],
+    cameraTarget: [-0.70, 0, 0.90],
     descriptionId: 'archdescription',
   },
 ];
@@ -291,7 +291,7 @@ function animate() {
     controls.update();
     renderer.render(scene, camera);
     if (isZooming || isOrbiting) return; // Skip update scene jika sedang animasi khusus
-    // camInfo.textContent = `Camera: x=${camera.position.x.toFixed(2)}, y=${camera.position.y.toFixed(2)}, z=${camera.position.z.toFixed(2)}`;
+    camInfo.textContent = `Camera: x=${camera.position.x.toFixed(2)}, y=${camera.position.y.toFixed(2)}, z=${camera.position.z.toFixed(2)}`;
 
     // const maxY = 2.0;
     // const minY = 0.3;
