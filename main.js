@@ -46,12 +46,12 @@ splats.position.set(-0.4, 0.5, 0.40); // geser Y ke 0.2, X & Z tetap
 
 scene.add(splats);
 
-const axesHelper = new THREE.AxesHelper( 10 );
-axesHelper.position.y = 0;
-scene.add( axesHelper );
+// const axesHelper = new THREE.AxesHelper( 10 );
+// axesHelper.position.y = 0;
+// scene.add( axesHelper );
 
 // caminfo
-const camInfo = document.getElementById('cam-info');
+// const camInfo = document.getElementById('cam-info');
 
 const areaButtons = [
   {
