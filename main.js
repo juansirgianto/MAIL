@@ -128,23 +128,28 @@ document.querySelectorAll('.close-description').forEach(btn => {
 let isCameraAnimating = false;
 
 let needsRender = true;
-controls.addEventListener('change', () => { needsRender = true; });
-window.addEventListener('resize', () => { 
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  needsRender = true; 
-});
+let warmingUp = true;
+const WARMUP_MS = 1000;                 // 1.5 detik
+const warmUpEndAt = performance.now() + WARMUP_MS;
 
 function renderLoop(){
   requestAnimationFrame(renderLoop);
-  // Kalau damping masih bergerak, update() akan return true → render lagi
+
+  // Kalau damping masih jalan, ini akan true -> render
   if (controls.update()) needsRender = true;
+
+  // Paksa render saat awal supaya asset kelihatan segera
+  if (warmingUp) {
+    needsRender = true;
+    if (performance.now() >= warmUpEndAt) warmingUp = false;
+  }
+
   if (!needsRender) return;
   renderer.render(scene, camera);
   needsRender = false;
 }
 renderLoop();
+
 
 function moveCameraTo(position, lookAt = null, duration = 1000) {
   needsRender = true;
