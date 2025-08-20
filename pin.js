@@ -24,7 +24,7 @@ export function createPins(scene) {
 
 const pin1 = createPin(
   new THREE.Vector3(0.28, 0, -0.41),
-  'assets/pin1.svg',
+  'public/assets/pin1.svg',
   'Unit A',
   'Sold',
   '1,325,000 $'
@@ -32,7 +32,7 @@ const pin1 = createPin(
 
 const pin2 = createPin(
   new THREE.Vector3(-0.35, 0, 0),
-  'assets/pin2.svg',
+  'public/assets/pin2.svg',
   'Unit B',
   'Available',
   '985,000 $'
@@ -40,7 +40,7 @@ const pin2 = createPin(
 
 const pin3 = createPin(
   new THREE.Vector3(-1, 0, 0.59),
-  'assets/pin3.svg',
+  'public/assets/pin3.svg',
   'Unit B',
   'Available',
   '985,000 $'
@@ -48,7 +48,7 @@ const pin3 = createPin(
 
 const pin4 = createPin(
   new THREE.Vector3(-0.38, 0, 0.96),
-  'assets/pin4.svg',
+  'public/assets/pin4.svg',
   'Unit B',
   'Available',
   '985,000 $'
@@ -56,7 +56,7 @@ const pin4 = createPin(
 
 const pin5 = createPin(
   new THREE.Vector3(-0.70, 0, 0.90),
-  'assets/pin5.svg',
+  'public/assets/pin5.svg',
   'Unit B',
   'Available',
   '985,000 $'
