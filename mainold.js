@@ -128,19 +128,13 @@ document.querySelectorAll('.close-description').forEach(btn => {
 let isCameraAnimating = false;
 
 let needsRender = true;
-controls.addEventListener('change', () => { needsRender = true; });
-window.addEventListener('resize', () => { 
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  needsRender = true; 
-});
+controls.addEventListener('change', () => needsRender = true);
+window.addEventListener('resize', () => { needsRender = true; });
 
 function renderLoop(){
   requestAnimationFrame(renderLoop);
-  // Kalau damping masih bergerak, update() akan return true → render lagi
-  if (controls.update()) needsRender = true;
   if (!needsRender) return;
+  controls.update();
   renderer.render(scene, camera);
   needsRender = false;
 }
@@ -310,6 +304,21 @@ videoModal.addEventListener('click', (e) => {
 
   let isZooming = false;
 let isOrbiting = false;
+
+// Animate
+function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+    if (isZooming || isOrbiting) return; // Skip update scene jika sedang animasi khusus
+    camInfo.textContent = `Camera: x=${camera.position.x.toFixed(2)}, y=${camera.position.y.toFixed(2)}, z=${camera.position.z.toFixed(2)}`;
+
+    // const maxY = 2.0;
+    // const minY = 0.3;
+    // camera.position.y = Math.min(maxY, Math.max(minY, camera.position.y));
+}
+
+animate();
 
 // Resize handler
 window.addEventListener('resize', () => {
