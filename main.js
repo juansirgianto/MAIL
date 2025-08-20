@@ -10,11 +10,14 @@ initCarousel();
 
 // Init scene
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 3);
 camera.position.set(0.58, 0.95, -0.56);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: false, powerPreference: 'high-performance' });
+scene.background = new THREE.Color(0x000000);
 renderer.setSize(window.innerWidth, window.innerHeight);
+const DPR = Math.min(window.devicePixelRatio, 1.25); // atau 1.0–1.5
+renderer.setPixelRatio(DPR);
 document.body.appendChild(renderer.domElement);
 
 const canvas = renderer.domElement;
