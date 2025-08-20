@@ -129,7 +129,7 @@ let isCameraAnimating = false;
 
 let needsRender = true;
 let warmingUp = true;
-const WARMUP_MS = 1000;                 // 1.5 detik
+const WARMUP_MS = 3000;                 // 1.5 detik
 const warmUpEndAt = performance.now() + WARMUP_MS;
 
 function renderLoop(){
