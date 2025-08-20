@@ -127,7 +127,21 @@ document.querySelectorAll('.close-description').forEach(btn => {
 
 let isCameraAnimating = false;
 
+let needsRender = true;
+controls.addEventListener('change', () => needsRender = true);
+window.addEventListener('resize', () => { needsRender = true; });
+
+function renderLoop(){
+  requestAnimationFrame(renderLoop);
+  if (!needsRender) return;
+  controls.update();
+  renderer.render(scene, camera);
+  needsRender = false;
+}
+renderLoop();
+
 function moveCameraTo(position, lookAt = null, duration = 1000) {
+  needsRender = true;
   if (isCameraAnimating) return; // hindari tumpukan animasi
   isCameraAnimating = true;
   const start = camera.position.clone();
@@ -142,6 +156,7 @@ function moveCameraTo(position, lookAt = null, duration = 1000) {
     const t = Math.min(elapsed / duration, 1);
     camera.position.lerpVectors(start, end, t);
     controls.target.lerpVectors(startTarget, endTarget, t);
+    needsRender = true;
 
     if (t < 1) {
       requestAnimationFrame(animateCamera);
@@ -172,6 +187,7 @@ canvas.addEventListener('click', (event) => {
     if (pinPOI) {
       // Pindahkan kamera
       moveCameraTo(pinPOI.camera_position.toArray(), pinPOI.camera_target.toArray());
+      needsRender = true;
 
       // Tampilkan deskripsi
       document.querySelectorAll('.description-box').forEach(d => d.style.display = 'none');
@@ -237,6 +253,7 @@ canvas.addEventListener('pointermove', (event) => {
       if (hoveredSprite !== sprite) {
         if (hoveredSprite) hoveredSprite.material.color.setHex(0xffffff);
         sprite.material.color.setHex(0x757641);
+        needsRender = true;
         hoveredSprite = sprite;
       }
       canvas.style.cursor = 'pointer';
