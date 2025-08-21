@@ -179,24 +179,24 @@ function moveCameraTo(position, lookAt = null, duration = 1000) {
   requestAnimationFrame(animateCamera);
 }
 
-const fpsEl = document.getElementById('fps-counter');
+// const fpsEl = document.getElementById('fps-counter');
 
-let frameCount = 0;
-let lastTime = performance.now();
-let fps = 0;
+// let frameCount = 0;
+// let lastTime = performance.now();
+// let fps = 0;
 
-function updateFPS(now) {
-  frameCount++;
-  const delta = now - lastTime;
-  if (delta >= 1000) { // setiap 1 detik
-    fps = (frameCount * 1000 / delta).toFixed(1);
-    fpsEl.textContent = `FPS: ${fps}`;
-    frameCount = 0;
-    lastTime = now;
-  }
-  requestAnimationFrame(updateFPS);
-}
-requestAnimationFrame(updateFPS);
+// function updateFPS(now) {
+//   frameCount++;
+//   const delta = now - lastTime;
+//   if (delta >= 1000) { // setiap 1 detik
+//     fps = (frameCount * 1000 / delta).toFixed(1);
+//     fpsEl.textContent = `FPS: ${fps}`;
+//     frameCount = 0;
+//     lastTime = now;
+//   }
+//   requestAnimationFrame(updateFPS);
+// }
+// requestAnimationFrame(updateFPS);
 
 
 
