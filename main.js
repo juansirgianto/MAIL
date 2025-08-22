@@ -226,6 +226,13 @@ canvas.addEventListener('click', (event) => {
       const desc = document.getElementById(pinPOI.descriptionId);
       if (desc) desc.style.display = 'block';
 
+      // 🔥 Set tombol active
+      document.querySelectorAll('.area-button').forEach(b => b.dataset.active = "false");
+      // misalnya urutannya sama: pin ke-1 cocok button ke-1
+      const index = pinPOIs.indexOf(pinPOI); 
+      const targetBtn = document.querySelectorAll('.area-button')[index];
+      if (targetBtn) targetBtn.dataset.active = "true";
+
       // Highlight sementara
       clickedSprite.material.color.set(0xffffff);
       setTimeout(() => clickedSprite.material.color.set(0xffffff), 300);
